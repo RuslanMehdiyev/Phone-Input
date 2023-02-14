@@ -11,23 +11,20 @@ function App() {
         strippedValue += value[i];
       }
     }
-    if (strippedValue.length <= 10) {
-      setPhone(formatPhone(strippedValue));
+    if (strippedValue.length == 0) {
+      setPhone("");
+    } else if (strippedValue.length <= 3) {
+      setPhone(`(${strippedValue}`);
+    } else if (strippedValue.length <= 6) {
+      setPhone(`(${strippedValue.slice(0, 3)}) ${strippedValue.slice(3, 6)}`);
+    } else if (strippedValue.length <= 10) {
+      setPhone(
+        `(${strippedValue.slice(0, 3)}) ${strippedValue.slice(
+          3,
+          6
+        )}-${strippedValue.slice(6, 10)}`
+      );
     }
-  };
-
-  const formatPhone = (strippedPhone) => {
-    if (strippedPhone.length === 3) {
-      return `(${strippedPhone})`;
-    } else if (strippedPhone.length > 3 && strippedPhone.length <= 6) {
-      return `(${strippedPhone.slice(0, 3)}) ${strippedPhone.slice(3, 6)}`;
-    } else if (strippedPhone.length > 6 && strippedPhone.length <= 10) {
-      return `(${strippedPhone.slice(0, 3)}) ${strippedPhone.slice(
-        3,
-        6
-      )}-${strippedPhone.slice(6, 10)}`;
-    }
-    return strippedPhone;
   };
 
   const handleSubmit = (e) => {
